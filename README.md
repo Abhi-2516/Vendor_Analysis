@@ -1,162 +1,163 @@
+Vendor Performance Analysis – Retail Inventory & Sales
+Analyzing vendor efficiency and profitability to support strategic purchasing and inventory decisions using SQL, Python, Streamlit, and Power BI.
 
-# 🧾 Vendor Performance Analysis – Retail Inventory & Sales
+📌 Table of Contents
+<a href="#overview">Overview</a>
 
-_Analyzing vendor efficiency and profitability to support strategic purchasing and inventory decisions using SQL, Python, and Power BI._
+<a href="#live-dashboard">Live Interactive Dashboard</a>
 
----
+<a href="#business-problem">Business Problem</a>
 
-## 📌 Table of Contents
-- <a href="#overview">Overview</a>
-- <a href="#business-problem">Business Problem</a>
-- <a href="#dataset">Dataset</a>
-- <a href="#tools--technologies">Tools & Technologies</a>
-- <a href="#project-structure">Project Structure</a>
-- <a href="#data-cleaning--preparation">Data Cleaning & Preparation</a>
-- <a href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a>
-- <a href="#research-questions--key-findings">Research Questions & Key Findings</a>
-- <a href="#dashboard">Dashboard</a>
-- <a href="#how-to-run-this-project">How to Run This Project</a>
-- <a href="#final-recommendations">Final Recommendations</a>
-- <a href="#author--contact">Author & Contact</a>
+<a href="#tools--technologies">Tools & Technologies</a>
 
----
+<a href="#project-structure">Project Structure</a>
+
+<a href="#research-questions--key-findings">Research Questions & Key Findings</a>
+
+<a href="#how-to-run-this-project">How to Run This Project</a>
+
+<a href="#final-recommendations">Final Recommendations</a>
+
+<a href="#acknowledgements">Acknowledgements</a>
+
+<a href="#author--contact">Author & Contact</a>
+
 <h2><a class="anchor" id="overview"></a>Overview</h2>
 
-This project evaluates vendor performance and retail inventory dynamics to drive strategic insights for purchasing, pricing, and inventory optimization. A complete data pipeline was built using SQL for ETL, Python for analysis and hypothesis testing, and Power BI for visualization.
+This project evaluates vendor performance and retail inventory dynamics to drive strategic insights for purchasing, pricing, and inventory optimization. A complete data pipeline was built using SQL for ETL and Python (Pandas, Seaborn, SciPy) for analysis and hypothesis testing.
 
----
+The final findings are presented in an interactive web application built with Streamlit, which includes the original project's key findings and new analysis on freight cost impact.
+
+
+
 <h2><a class="anchor" id="business-problem"></a>Business Problem</h2>
 
 Effective inventory and sales management are critical in the retail sector. This project aims to:
-- Identify underperforming brands needing pricing or promotional adjustments
-- Determine vendor contributions to sales and profits
-- Analyze the cost-benefit of bulk purchasing
-- Investigate inventory turnover inefficiencies
-- Statistically validate differences in vendor profitability
 
----
-<h2><a class="anchor" id="dataset"></a>Dataset</h2>
+Identify underperforming brands needing pricing or promotional adjustments
 
-- Multiple CSV files located in `/data/` folder (sales, vendors, inventory)
-- Summary table created from ingested data and used for analysis
+Determine vendor contributions to sales and profits
 
----
+Analyze the cost-benefit of bulk purchasing
+
+Investigate inventory turnover inefficiencies
+
+Statistically validate differences in vendor profitability
 
 <h2><a class="anchor" id="tools--technologies"></a>Tools & Technologies</h2>
 
-- SQL (Common Table Expressions, Joins, Filtering)
-- Python (Pandas, Matplotlib, Seaborn, SciPy)
-- Power BI (Interactive Visualizations)
-- GitHub
+Data Analysis: Python (Pandas, Matplotlib, Seaborn, SciPy)
 
----
+Database: SQL (Common Table Expressions, Joins) & SQLite
+
+Interactive App: Streamlit
+
+BI Dashboarding: Power BI
+
+Version Control: GitHub
+
 <h2><a class="anchor" id="project-structure"></a>Project Structure</h2>
 
-```
 vendor-performance-analysis/
 │
 ├── README.md
-├── .gitignore
-├── requirements.txt
-├── Vendor Performance Report.pdf
+├── app.py                      # The Streamlit web application
+├── requirements.txt            # Python libraries for the app
+├── inventory.db                # The SQLite database with all processed data
+├── Vendor Performance Report.pdf # Updated report with new findings
 │
-├── notebooks/                  # Jupyter notebooks
+├── notebooks/                  # Jupyter notebooks for analysis
 │   ├── exploratory_data_analysis.ipynb
 │   ├── vendor_performance_analysis.ipynb
+│   
 │
-├── scripts/                    # Python scripts for ingestion and processing
+├── scripts/                    # Original Python scripts for ETL
 │   ├── ingestion_db.py
 │   └── get_vendor_summary.py
 │
 ├── dashboard/                  # Power BI dashboard file
 │   └── vendor_performance_dashboard.pbix
-```
-
----
-<h2><a class="anchor" id="data-cleaning--preparation"></a>Data Cleaning & Preparation</h2>
-
-- Removed transactions with:
-  - Gross Profit ≤ 0
-  - Profit Margin ≤ 0
-  - Sales Quantity = 0
-- Created summary tables with vendor-level metrics
-- Converted data types, handled outliers, merged lookup tables
-
----
-<h2><a class="anchor" id="exploratory-data-analysis-eda"></a>Exploratory Data Analysis (EDA)</h2>
-
-**Negative or Zero Values Detected:**
-- Gross Profit: Min -52,002.78 (loss-making sales)
-- Profit Margin: Min -∞ (sales at zero or below cost)
-- Unsold Inventory: Indicating slow-moving stock
-
-**Outliers Identified:**
-- High Freight Costs (up to 257K)
-- Large Purchase/Actual Prices
-
-**Correlation Analysis:**
-- Weak between Purchase Price & Profit
-- Strong between Purchase Qty & Sales Qty (0.999)
-- Negative between Profit Margin & Sales Price (-0.179)
-
----
 <h2><a class="anchor" id="research-questions--key-findings"></a>Research Questions & Key Findings</h2>
 
-1. **Brands for Promotions**: 198 brands with low sales but high profit margins
-2. **Top Vendors**: Top 10 vendors = 65.69% of purchases → risk of over-reliance
-3. **Bulk Purchasing Impact**: 72% cost savings per unit in large orders
-4. **Inventory Turnover**: $2.71M worth of unsold inventory
-5. **Vendor Profitability**:
-   - High Vendors: Mean Margin = 31.17%
-   - Low Vendors: Mean Margin = 41.55%
-6. **Hypothesis Testing**: Statistically significant difference in profit margins → distinct vendor strategies
 
----
-<h2><a class="anchor" id="dashboard"></a>Dashboard</h2>
+Brands for Promotions: 198 brands were identified with low sales but high profit margins, making them prime targets for promotional adjustments .
 
-- Power BI Dashboard shows:
-  - Vendor-wise Sales and Margins
-  - Inventory Turnover
-  - Bulk Purchase Savings
-  - Performance Heatmaps
 
-![Vendor Performance Dashboard](images/dashboard.png)
+Top Vendors: The top 10 vendors account for 65.69% of total purchases, indicating a significant risk of over-reliance .
 
----
+
+Bulk Purchasing Impact: Large orders receive an average 72% cost savings per unit compared to small orders .
+
+
+Inventory Turnover: A total of $2.71M in capital is locked in unsold inventory, highlighting inefficiencies in stock management.
+
+
+Vendor Profitability: Low-performing vendors have a statistically higher mean profit margin (41.55%) than top-performing vendors (31.17%), suggesting they operate on different business models .
+
+
+Hypothesis Testing: A T-test confirmed a statistically significant difference (p < 0.05) in profit margins between high and low-performing vendors .
+
+New Finding - Freight Cost Impact: My analysis shows a clear negative correlation between freight costs (as a % of purchase) and profit margins, highlighting logistical efficiency as a key profitability driver.
+
 <h2><a class="anchor" id="how-to-run-this-project"></a>How to Run This Project</h2>
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/vendor-performance-analysis.git
-```
-3. Load the CSVs and ingest into database:
-```bash
-python scripts/ingestion_db.py
-```
-4. Create vendor summary table:
-```bash
-python scripts/get_vendor_summary.py
-```
-5. Open and run notebooks:
-   - `notebooks/exploratory_data_analysis.ipynb`
-   - `notebooks/vendor_performance_analysis.ipynb`
-6. Open Power BI Dashboard:
-   - `dashboard/vendor_performance_dashboard.pbix`
 
----
+Clone the repository:
+
+Bash
+
+git clone https://github.com/your-username/vendor-performance-analysis.git
+cd vendor-performance-analysis
+Install the required libraries:
+
+Bash
+
+pip install -r requirements.txt
+Run the Streamlit app:
+
+Bash
+
+streamlit run app.py
+Your browser will automatically open with the interactive dashboard.
+
+2. (Optional) Run the Original Analysis
+If you want to explore the original Jupyter notebooks or Power BI file:
+
+Jupyter: Run jupyter notebook from your terminal and open any file in the notebooks/ folder.
+
+Power BI: Open the dashboard/vendor_performance_dashboard.pbix file in Power BI Desktop.
+
 <h2><a class="anchor" id="final-recommendations"></a>Final Recommendations</h2>
 
-- Diversify vendor base to reduce risk
-- Optimize bulk order strategies
-- Reprice slow-moving, high-margin brands
-- Clear unsold inventory strategically
-- Improve marketing for underperforming vendors
 
----
+Diversify vendor base to reduce dependency risk on the top 10 suppliers.
+
+
+Optimize bulk order strategies to leverage the 72% cost savings.
+
+
+Reprice slow-moving, high-margin brands to increase sales volume.
+
+
+Launch clearance sales or revise storage strategies to clear the $2.71M in unsold inventory.
+
+
+Improve marketing for low-performing vendors to boost their sales volume.
+
+<h2><a class="anchor" id="acknowledgements"></a>Acknowledgements</h2>
+
+This project is an extension of the original "Vendor Performance Analysis" project by Ayushi Mishra . I have built upon the original analysis by adding new insights on freight cost impact and deploying the findings in a new, interactive Streamlit web application.
+
+You can find the original author's portfolio here:
+
+
+LinkedIn 
+
+
+Portfolio 
+
 <h2><a class="anchor" id="author--contact"></a>Author & Contact</h2>
 
-**Ayushi Mishra**  
-Data Analyst  
-📧 Email: techclasses0810@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/ayushi-mishra-30813b174/)  
-🔗 [Portfolio](https://www.youtube.com/@techclasses0810/)
+[Abhishek Yadav]
+
+Data Analyst
